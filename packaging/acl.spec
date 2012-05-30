@@ -6,6 +6,7 @@ Summary:        Access control list utilities
 Url:            http://savannah.nongnu.org/projects/acl
 Group:          System/Base
 Source:         http://download.savannah.gnu.org/releases/acl/acl-%{version}.src.tar.gz
+Source1001: packaging/acl.manifest 
 
 # SLP patches
 Patch0: 01-Makefile.patch
@@ -58,6 +59,7 @@ defined in POSIX 1003.1e draft standard 17.
 %patch6 -p1 
 
 %build
+cp %{SOURCE1001} .
 export INSTALL_USER=root INSTALL_GROUP=root
 make configure
 make default
@@ -86,16 +88,19 @@ chmod 0755 %{buildroot}/%{_lib}/libacl.so.*.*.*
 %docs_package
 
 %files
+%manifest acl.manifest
 %{_bindir}/chacl
 %{_bindir}/getfacl
 %{_bindir}/setfacl
 %{_prefix}/share/locale/*/LC_MESSAGES/*.mo
 
 %files -n libacl-devel
+%manifest acl.manifest
 /%{_lib}/libacl.so
 %{_includedir}/acl
 %{_includedir}/sys/acl.h
 %{_libdir}/libacl.*
 
 %files -n libacl
+%manifest acl.manifest
 /%{_lib}/libacl.so.*
