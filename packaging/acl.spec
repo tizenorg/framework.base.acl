@@ -5,7 +5,7 @@ License:        GPLv2
 Summary:        Access control list utilities
 Url:            http://savannah.nongnu.org/projects/acl
 Group:          System/Base
-Source:         http://download.savannah.gnu.org/releases/acl/acl-%{version}.src.tar.gz
+Source:         http://download.savannah.gnu.org/releases/acl/acl-%{version}.tar.gz
 Source1001: packaging/acl.manifest 
 
 # SLP patches

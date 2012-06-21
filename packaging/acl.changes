@@ -1,0 +1,11 @@
+* Thu Jun 21 2012 Anas Nashif <anas.nashif@intel.com> 83621db
+- Change to tarball name to make gbs work
+
+* Wed May 30 2012 Ryan Ware <ryan.r.ware@intel.com> a0e38cc
+- Add default Smack manifest for acl.spec
+
+* Fri Jan 06 2012 Kibum Kim <kb0929.kim@samsung.com> dc8f351
+- Git init
+[ Eunkyoung Kim ]
+- Initial empty repository
+
