@@ -64,6 +64,9 @@ make default
 cd po; rm -rf acl.pot; make acl.pot
 
 %install
+mkdir -p %{buildroot}/usr/share/license
+cp %{_builddir}/%{name}-%{version}/doc/COPYING %{buildroot}/usr/share/license/%{name}
+cat %{_builddir}/%{name}-%{version}/doc/COPYING.LGPL >> %{buildroot}/usr/share/license/%{name}
 DIST_ROOT=%{buildroot} make -C . install
 DIST_ROOT=%{buildroot} make -C . install-dev
 DIST_ROOT=%{buildroot} make -C . install-lib
@@ -90,6 +93,7 @@ chmod 0755 %{buildroot}/%{_lib}/libacl.so.*.*.*
 %{_bindir}/getfacl
 %{_bindir}/setfacl
 %{_prefix}/share/locale/*/LC_MESSAGES/*.mo
+/usr/share/license/%{name}
 
 %files -n libacl-devel
 /%{_lib}/libacl.so
