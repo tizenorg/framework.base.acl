@@ -103,3 +103,4 @@ chmod 0755 %{buildroot}/%{_lib}/libacl.so.*.*.*
 
 %files -n libacl
 /%{_lib}/libacl.so.*
+/usr/share/license/%{name}
