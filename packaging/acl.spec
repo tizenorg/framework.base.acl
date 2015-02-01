@@ -1,4 +1,3 @@
-#sbs-git:slp/pkgs/a/acl acl 2.2.49-3 01110fb39ff779aaa26f141f40d55fe8b4682ddf
 Name:           acl
 Version:        2.2.49
 Release:        1
@@ -62,8 +61,13 @@ defined in POSIX 1003.1e draft standard 17.
 
 %build
 export INSTALL_USER=root INSTALL_GROUP=root
+%configure \
+	--prefix=/ \
+	--exec-prefix=/ \
+	--libdir=/%{_lib} \
+	--libexecdir=%{_libdir}
 make configure
-make default
+make default %{?_smp_mflags}
 cd po; rm -rf acl.pot; make acl.pot
 
 %install
@@ -75,8 +79,8 @@ DIST_ROOT=%{buildroot} make -C build src-manifest
 mkdir -p %{buildroot}/%{_datadir}/license
 cp -f doc/COPYING.LGPL %{buildroot}/%{_datadir}/license/libacl
 
-rm -f %{buildroot}/lib/*.a
-rm -f %{buildroot}/lib/*.la
+rm -f %{buildroot}/%{_lib}/*.a
+rm -f %{buildroot}/%{_lib}/*.la
 rm -rf %{buildroot}%{_defaultdocdir}
 
 # fix links to shared libs and permissions
@@ -89,20 +93,24 @@ chmod 0755 %{buildroot}/%{_lib}/libacl.so.*.*.*
 
 %postun -n libacl -p /sbin/ldconfig
 
+
 %docs_package
 
 %files
+%defattr(-,root,root,-)
 %{_bindir}/chacl
 %{_bindir}/getfacl
 %{_bindir}/setfacl
 %{_prefix}/share/locale/*/LC_MESSAGES/*.mo
 
 %files -n libacl-devel
+%defattr(-,root,root,-)
 /%{_lib}/libacl.so
 %{_includedir}/acl
 %{_includedir}/sys/acl.h
 %{_libdir}/libacl.*
 
 %files -n libacl
+%defattr(-,root,root,-)
 /%{_lib}/libacl.so.*
 %{_datadir}/license/libacl
